@@ -1,7 +1,7 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <resources>
-  <string name="app_name">Gadgetbridge</string>
-  <string name="title_activity_controlcenter">Gadgetbridge</string>
+  <string name="app_name">Pulse</string>
+  <string name="title_activity_controlcenter">Pulse</string>
   <string name="action_settings">Einstellungen</string>
   <string name="action_debug">Debug</string>
   <string name="action_quit">Beenden</string>
@@ -47,9 +47,9 @@
   <string name="title_activity_fw_app_insaller">FW/App Installer</string>
   <string name="fw_upgrade_notice">Es soll die Firmware %s anstelle der aktuell installierten Version auf das Mi Band gespielt werden.</string>
   <string name="fw_multi_upgrade_notice">Es sollen die Firmwares %1$s und %2$s anstelle der aktuell installierten Versionen auf das Mi Band gespielt werden.</string>
-  <string name="miband_firmware_known">Diese Firmware ist getestet worden und ist zu Gadgetbridge kompatibel.</string>
-  <string name="miband_firmware_unknown_warning">Diese Firmware ist nicht getestet und könnte inkompatibel mit Gadgetbridge sein.\n\nEs wird nicht empfohlen, sie auf dem Mi Band zu installieren!</string>
-  <string name="miband_firmware_suggest_whitelist">Falls die Firmware trotzdem installiert werden soll und nachher alles korrekt funktioniert, melde bitte den Gadgetbridge-Entwicklern, dass die Firmware %s funktioniert</string>
+  <string name="miband_firmware_known">Diese Firmware ist getestet worden und ist zu Pulse kompatibel.</string>
+  <string name="miband_firmware_unknown_warning">Diese Firmware ist nicht getestet und könnte inkompatibel mit Pulse sein.\n\nEs wird nicht empfohlen, sie auf dem Mi Band zu installieren!</string>
+  <string name="miband_firmware_suggest_whitelist">Falls die Firmware trotzdem installiert werden soll und nachher alles korrekt funktioniert, melde bitte den Pulse-Entwicklern, dass die Firmware %s funktioniert</string>
   <!--Strings related to Settings-->
   <string name="title_activity_settings">Einstellungen</string>
   <string name="pref_header_general">Allgemeine Einstellungen</string>
@@ -65,7 +65,7 @@
   <string name="pref_theme_light">Hell</string>
   <string name="pref_theme_dark">Dunkel</string>
   <string name="pref_title_language">Sprache</string>
-  <string name="pref_title_minimize_priority">Gadgetbridge-Benachrichtigung ausblenden</string>
+  <string name="pref_title_minimize_priority">Pulse-Benachrichtigung ausblenden</string>
   <string name="pref_summary_minimize_priority_off">Das Symbol in der Statusleiste und die Benachrichtigung auf dem Sperrbildschirm werden angezeigt</string>
   <string name="pref_summary_minimize_priority_on">Das Symbol in der Statusleiste und die Benachrichtigung auf dem Sperrbildschirm werden nicht angezeigt</string>
   <string name="pref_header_notifications">Benachrichtigungen</string>
@@ -136,7 +136,7 @@
   <string name="pref_title_pebble_mtu_limit">Pebble 2/LE GATT MTU Limit</string>
   <string name="pref_summary_pebble_mtu_limit">Wenn deine Pebble 2/Pebble LE nicht so wie erwartet funktioniert, versuche die MTU zu begrenzen (erlaubte Werte 20 bis 512)</string>
   <string name="pref_title_pebble_enable_applogs">Watch App Logging einschalten</string>
-  <string name="pref_summary_pebble_enable_applogs">Schreibt Logs von Watch Apps in Gadgetbridge-Logs (Pebble muss nach Ändern der Option erneut verbunden werden)</string>
+  <string name="pref_summary_pebble_enable_applogs">Schreibt Logs von Watch Apps in Pulse-Logs (Pebble muss nach Ändern der Option erneut verbunden werden)</string>
   <string name="pref_title_pebble_always_ack_pebblekit">nicht ausgereiftes PebbleKit ACKen</string>
   <string name="pref_summary_pebble_always_ack_pebblekit">Nachrichten, die an externe Drittanbieter-Apps geschickt werden, werden immer und sofort bestätigt</string>
   <string name="pref_title_pebble_reconnect_attempts">Wiederverbindungsversuche</string>
@@ -154,7 +154,7 @@
   <string name="_unknown_">(unbekannt)</string>
   <string name="test">Test</string>
   <string name="test_notification">Test Benachrichtigung</string>
-  <string name="this_is_a_test_notification_from_gadgetbridge">Dies ist eine Testbenachrichtigung von Gadgetbridge</string>
+  <string name="this_is_a_test_notification_from_gadgetbridge">Dies ist eine Testbenachrichtigung von Pulse</string>
   <string name="bluetooth_is_not_supported_">Bluetooth wird nicht unterstützt.</string>
   <string name="bluetooth_is_disabled_">Bluetooth ist deaktiviert.</string>
   <string name="tap_connected_device_for_app_mananger">Tippe auf das verbundene Gerät, um den App-Manager zu starten</string>
@@ -162,7 +162,7 @@
   <string name="tap_connected_device_for_vibration">Tippe auf das verbundene Gerät, um es vibrieren zu lassen</string>
   <string name="tap_a_device_to_connect">Tippe zum Verbinden auf das gewünschte Gerät</string>
   <string name="cannot_connect_bt_address_invalid_">Verbindung kann nicht aufgebaut werden. Bluetooth-Adresse ungültig?</string>
-  <string name="gadgetbridge_running">Gadgetbridge läuft</string>
+  <string name="gadgetbridge_running">Pulse läuft</string>
   <string name="installing_binary_d_d">Installiere Datei %1$d/%2$d</string>
   <string name="installation_failed_">Installation fehlgeschlagen</string>
   <string name="installation_successful">Installation erfolgreich</string>
@@ -195,7 +195,7 @@
   <string name="miband_pairing_using_dummy_userdata">Keine gültigen Benutzerinformationen angegeben, verwende Dummy-Daten für\'s Erste.</string>
   <string name="miband_pairing_tap_hint">Wenn Dein Mi Band vibriert und blinkt, tippe ein paar Mal schnell hintereinander darauf.</string>
   <string name="appinstaller_install">Installieren</string>
-  <string name="discovery_connected_devices_hint">Mache dein Gerät auffindbar. Derzeit verbundene Geräte werden wahrscheinlich nicht erkannt. Aktiviere die Standortbestimmung (zum Beispiel GPS) in Android 6+. Deaktiviere den Privatsphäreschutz für Gadgetbridge, da er zu Abstürzen und Neustarts deines Telefons führen kann. Wenn nach einigen Minuten kein Gerät erkannt wird, versuche es nach einem Neustart deines Telefons erneut.</string>
+  <string name="discovery_connected_devices_hint">Mache dein Gerät auffindbar. Derzeit verbundene Geräte werden wahrscheinlich nicht erkannt. Aktiviere die Standortbestimmung (zum Beispiel GPS) in Android 6+. Deaktiviere den Privatsphäreschutz für Pulse, da er zu Abstürzen und Neustarts deines Telefons führen kann. Wenn nach einigen Minuten kein Gerät erkannt wird, versuche es nach einem Neustart deines Telefons erneut.</string>
   <string name="discovery_note">Tipp:</string>
   <string name="candidate_item_device_image">Gerätebild</string>
   <string name="miband_prefs_alias">Name/Alias</string>
@@ -285,7 +285,7 @@
   <string name="liveactivity_live_activity">Live Aktivität</string>
   <string name="weeksteps_today_steps_description">Schritte heute, Ziel: %1$s</string>
   <string name="pref_title_dont_ack_transfer">Transfer von Aktivitätsdaten nicht bestätigen</string>
-  <string name="pref_summary_dont_ack_transfers">Wenn der Transfer der Aktivitätsdaten nicht bestätigt wird, werden die Daten nicht auf dem Mi Band gelöscht. Das ist sinnvoll, wenn neben Gadgetbridge noch andere Apps auf das Mi Band zugreifen.</string>
+  <string name="pref_summary_dont_ack_transfers">Wenn der Transfer der Aktivitätsdaten nicht bestätigt wird, werden die Daten nicht auf dem Mi Band gelöscht. Das ist sinnvoll, wenn neben Pulse noch andere Apps auf das Mi Band zugreifen.</string>
   <string name="pref_summary_keep_data_on_device">Aktivitätsdaten verbleiben auf dem Mi Band, auch nach der Synchronisierung. Hilfreich, wenn das Mi Band mit weiteren Apps verwendet wird.</string>
   <string name="pref_title_low_latency_fw_update">Benutze Modus mit niedriger Latenz für Firmware-Updates</string>
   <string name="pref_summary_low_latency_fw_update">Dies kann bei Geräten helfen, bei denen Firmwareupdates fehlschlagen</string>

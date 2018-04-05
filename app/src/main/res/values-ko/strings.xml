@@ -321,7 +321,7 @@
     <string name="pref_title_pebble_mtu_limit">Pebble 2/LE GATT MTU 제한</string>
     <string name="pref_summary_pebble_mtu_limit">만약 Pebble 2/Pebble LE가 기대한 대로 작동하지 않는다면, 이 설정을 사용하여 MTU를 제한하세요 (20-512까지 설정 가능)</string>
     <string name="pref_title_pebble_enable_applogs">시계 앱 로그 활성화</string>
-    <string name="pref_summary_pebble_enable_applogs">시계 앱들의 로그를 Gadgetbridge가 기록합니다 (재연결 필요)</string>
+    <string name="pref_summary_pebble_enable_applogs">시계 앱들의 로그를 Pulse가 기록합니다 (재연결 필요)</string>
     <string name="pref_title_pebble_always_ack_pebblekit">끝나기 전 미리 PebbleKit 연결에 ACK 보내기</string>
     <string name="pref_summary_pebble_always_ack_pebblekit">제 3자 앱으로 보내는 메세지에 언제나 바로 ACK을 보냅니다</string>
 

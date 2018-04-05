@@ -58,21 +58,21 @@
                 android:layout_height="48dp"
                 android:layout_alignParentStart="true"
                 android:layout_below="@id/device_item_infos_box"
-                android:contentDescription="@string/candidate_item_device_image"
-                android:clickable="true"
-                android:longClickable="true"
+                android:layout_marginTop="8dp"
                 android:background="?android:attr/selectableItemBackground"
-                android:src="@drawable/ic_device_pebble"
-                android:layout_marginTop="8dp" />
+                android:clickable="true"
+                android:contentDescription="@string/candidate_item_device_image"
+                android:longClickable="true"
+                android:src="@drawable/ic_device_pebble" />
 
             <TextView
                 android:id="@+id/device_name"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_toEndOf="@id/device_image"
                 android:layout_alignParentEnd="true"
-                android:layout_marginEnd="48dp"
                 android:layout_below="@id/device_item_infos_box"
+                android:layout_marginEnd="48dp"
+                android:layout_toEndOf="@id/device_image"
                 android:gravity="center"
                 android:maxLines="1"
                 android:textAppearance="@style/TextAppearance.AppCompat.Large"
@@ -82,10 +82,10 @@
                 android:id="@+id/device_status"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/device_name"
-                android:layout_toEndOf="@id/device_image"
                 android:layout_alignParentEnd="true"
+                android:layout_below="@id/device_name"
                 android:layout_marginEnd="48dp"
+                android:layout_toEndOf="@id/device_image"
                 android:gravity="center"
                 android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
                 tools:text="@string/connecting" />
@@ -97,21 +97,21 @@
                 android:layout_alignParentEnd="true"
                 android:layout_below="@id/device_item_infos_box"
                 android:layout_marginBottom="8dp"
-                android:layout_marginStart="8dp"
                 android:layout_marginEnd="0dp"
+                android:layout_marginStart="8dp"
                 android:layout_marginTop="8dp"
+                android:background="?android:attr/selectableItemBackground"
                 android:clickable="true"
                 android:contentDescription="@string/candidate_item_device_image"
                 android:tint="@color/secondarytext"
-                android:background="?android:attr/selectableItemBackground"
                 card_view:srcCompat="@drawable/ic_more_vert" />
 
             <LinearLayout
                 android:id="@+id/device_battery_status_box"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/device_image"
                 android:layout_alignParentStart="true"
+                android:layout_below="@id/device_image"
                 android:layout_margin="4dp"
                 android:orientation="vertical">
 
@@ -151,10 +151,10 @@
                     android:id="@+id/device_action_fetch_activity"
                     android:layout_width="40dp"
                     android:layout_height="40dp"
-                    android:padding="4dp"
                     android:background="?android:attr/selectableItemBackground"
                     android:clickable="true"
                     android:contentDescription="@string/controlcenter_fetch_activity_data"
+                    android:padding="4dp"
                     android:scaleType="fitXY"
                     android:tint="@color/secondarytext"
                     card_view:srcCompat="@drawable/ic_action_fetch_activity_data" />
@@ -243,6 +243,20 @@
                 android:scaleType="fitXY"
                 android:tint="@color/secondarytext"
                 card_view:srcCompat="@drawable/ic_action_find_lost_device" />
+
+            <ImageView
+                android:id="@+id/device_heart_rate"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_below="@id/device_image"
+                android:layout_margin="4dp"
+                android:layout_toEndOf="@id/device_action_find"
+                android:clickable="true"
+                android:contentDescription="@string/controlcenter_find_device"
+                android:padding="4dp"
+                android:scaleType="fitXY"
+                android:tint="@color/secondarytext"
+                card_view:srcCompat="@drawable/ic_heart_rate" />
 
         </RelativeLayout>
 

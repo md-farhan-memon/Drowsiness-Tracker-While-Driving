@@ -85,6 +85,9 @@ dependencies {
     compile 'org.apache.commons:commons-lang3:3.5'
     compile 'org.cyanogenmod:platform.sdk:6.0'
 
+    //SJAIN LOCATION ENABLED
+    compile 'com.google.android.gms:play-services-location:11.8.0'
+
 //    compile project(":DaoCore")
 }
 

@@ -1,7 +1,7 @@
 <?xml version='1.0' encoding='UTF-8'?>
-<resources><string name="app_name">Gadgetbridge</string>
+<resources><string name="app_name">Pulse</string>
 
-    <string name="title_activity_controlcenter">Gadgetbridge</string>
+    <string name="title_activity_controlcenter">Pulse</string>
     <string name="action_settings">设置</string>
     <string name="action_debug">调试</string>
     <string name="action_quit">退出</string>
@@ -63,11 +63,11 @@
 \n 
 \n***未经测试的固件，可能会使您的设备发生故障，由您自行承担风险！</string>
     <string name="fw_multi_upgrade_notice">您即将安装固件 %1$s 和 %2$s，代替当前在Mi Band上的固件。</string>
-    <string name="miband_firmware_known">该固件已经过测试，并且已知与Gadgetbridge兼容。</string>
-    <string name="miband_firmware_unknown_warning">此固件未经测试，可能与Gadgetbridge不兼容。
+    <string name="miband_firmware_known">该固件已经过测试，并且已知与Pulse兼容。</string>
+    <string name="miband_firmware_unknown_warning">此固件未经测试，可能与Pulse不兼容。
 \n
 \n不建议把它安装到你的Mi Band！</string>
-    <string name="miband_firmware_suggest_whitelist">如果您仍想继续并且此固件在安装之后能够正常工作，请告知Gadgetbridge开发者将固件%s列入白名单</string>
+    <string name="miband_firmware_suggest_whitelist">如果您仍想继续并且此固件在安装之后能够正常工作，请告知Pulse开发者将固件%s列入白名单</string>
 
     <string name="title_activity_settings">设置</string>
 
@@ -89,7 +89,7 @@
 
     <string name="pref_title_language">语言</string>
 
-    <string name="pref_title_minimize_priority">隐藏 Gadgetbridge 通知</string>
+    <string name="pref_title_minimize_priority">隐藏 Pulse 通知</string>
     <string name="pref_summary_minimize_priority_off">状态栏中的图标和锁定屏幕中的通知已被开启</string>
     <string name="pref_summary_minimize_priority_on">状态栏中的图标和锁定屏幕中的通知已被隐藏</string>
 
@@ -171,7 +171,7 @@
     <string name="pref_title_pebble_forceuntested">启用未经测试的功能</string>
     <string name="pref_summary_pebble_forceuntested">启用未经测试的功能。仅当你知道你在做什么时启用!</string>
     <string name="pref_title_pebble_enable_applogs">启用手表调试日志</string>
-    <string name="pref_summary_pebble_enable_applogs">应用程序日志将保存在Gadgetbridge中（需要重新连接）</string>
+    <string name="pref_summary_pebble_enable_applogs">应用程序日志将保存在Pulse中（需要重新连接）</string>
     <string name="pref_summary_pebble_always_ack_pebblekit">这将导致发送到外部第三方应用程序的消息始终立即得到确认</string>
     <string name="pref_title_pebble_enable_bgjs">启用后台JS</string>
     <string name="pref_summary_pebble_enable_bgjs">启用后，将允许表盘显示天气，电池等信息。</string>
@@ -191,14 +191,14 @@
     <string name="_unknown_">(未知)</string>
     <string name="test">测试</string>
     <string name="test_notification">测试通知</string>
-    <string name="this_is_a_test_notification_from_gadgetbridge">这是来自Gadgetbridge的测试通知</string>
+    <string name="this_is_a_test_notification_from_gadgetbridge">这是来自Pulse的测试通知</string>
     <string name="bluetooth_is_not_supported_">不支持蓝牙。</string>
     <string name="bluetooth_is_disabled_">蓝牙已禁用。</string>
     <string name="tap_connected_device_for_activity">点按以激活已连接的设备</string>
     <string name="tap_connected_device_for_vibration">点按以震动已连接的设备</string>
     <string name="tap_a_device_to_connect">点按一个设备以连接</string>
     <string name="cannot_connect_bt_address_invalid_">无法连接。 蓝牙地址无效？</string>
-    <string name="gadgetbridge_running">Gadgetbridge 正在运行</string>
+    <string name="gadgetbridge_running">Pulse 正在运行</string>
     <string name="installing_binary_d_d">正在安装二进制文件 %1$d/%2$d</string>
     <string name="installation_failed_">安装失败</string>
     <string name="installation_successful">安装成功</string>
@@ -240,7 +240,7 @@
     <string name="miband_pairing_using_dummy_userdata">没有提供有效的用户数据, 现在使用虚拟用户数据。</string>
     <string name="miband_pairing_tap_hint">当您的Mi Band振动并闪烁时，请连续点击几下。</string>
     <string name="appinstaller_install">安装</string>
-    <string name="discovery_connected_devices_hint">请设置并使您的设备可被发现。 当前连接的设备可能不会被发现。 对于Android 6及更高版本，您需要启用位置信息（如GPS）。 若禁用权限，Gadgetbridge可能会崩溃并重新启动。 如果几分钟后没有找到设备，请重新启动您的移动设备后再试。</string>
+    <string name="discovery_connected_devices_hint">请设置并使您的设备可被发现。 当前连接的设备可能不会被发现。 对于Android 6及更高版本，您需要启用位置信息（如GPS）。 若禁用权限，Pulse可能会崩溃并重新启动。 如果几分钟后没有找到设备，请重新启动您的移动设备后再试。</string>
     <string name="discovery_note">注意:</string>
     <string name="candidate_item_device_image">设备图像</string>
     <string name="miband_prefs_alias">名称/别名</string>
@@ -538,5 +538,5 @@
     <string name="devicetype_vibratissimo">Vibratissimo</string>
     <string name="devicetype_hplus">HPlus</string>
     <string name="choose_auto_export_location">选择导出位置</string>
-<string name="notification_channel_name">Gadgetbridge 通知</string>
+<string name="notification_channel_name">Pulse 通知</string>
 </resources>

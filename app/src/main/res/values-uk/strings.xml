@@ -1,7 +1,7 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <resources>
-  <string name="app_name">Gadgetbridge</string>
-  <string name="title_activity_controlcenter">Gadgetbridge</string>
+  <string name="app_name">Pulse</string>
+  <string name="title_activity_controlcenter">Pulse</string>
   <string name="action_settings">Налаштування</string>
   <string name="action_debug">Зневадження</string>
   <string name="action_quit">Вихід</string>
@@ -32,8 +32,8 @@
   <string name="title_activity_fw_app_insaller">Встановлення мікропрограми</string>
   <string name="fw_upgrade_notice">Ви збираєтесь встановити мікропрограму %s на заміну поточній Вашого Mi–Band.</string>
   <string name="fw_multi_upgrade_notice">Ви збираєтесь встановити мікропрограми %1$s та %2$s на заміну поточній Вашого Mi–Band.</string>
-  <string name="miband_firmware_known">Ця мікропрограма була перевірена на сумісність із Gadgetbridge.</string>
-  <string name="miband_firmware_unknown_warning">Ця мікропрограма не перевірялася і може бути не сумісною із Gadgetbridge.
+  <string name="miband_firmware_known">Ця мікропрограма була перевірена на сумісність із Pulse.</string>
+  <string name="miband_firmware_unknown_warning">Ця мікропрограма не перевірялася і може бути не сумісною із Pulse.
 \n
 \nНе рекомендується встановлювати її на Ваш Mi–Band!</string>
   <string name="miband_firmware_suggest_whitelist">Якщо ж Ви вирішили продовжити та все працює, будь ласка, повідомте про це розробникам, аби відмітити цю версію мікропрограми сумісною: %s</string>
@@ -95,11 +95,11 @@
   <string name="_unknown_">(невідомо)</string>
   <string name="test">Тест</string>
   <string name="test_notification">Тест сповіщень</string>
-  <string name="this_is_a_test_notification_from_gadgetbridge">Це тестове сповіщення від Gadgetbridge</string>
+  <string name="this_is_a_test_notification_from_gadgetbridge">Це тестове сповіщення від Pulse</string>
   <string name="bluetooth_is_not_supported_">Bluetooth не підтримується.</string>
   <string name="bluetooth_is_disabled_">Bluetooth вимкнуто.</string>
   <string name="cannot_connect_bt_address_invalid_">Не вдалося з\'єднатися. Можливо помилкова адреса BT?</string>
-  <string name="gadgetbridge_running">Gadgetbridge запущено</string>
+  <string name="gadgetbridge_running">Pulse запущено</string>
   <string name="installing_binary_d_d">встановлення бінарного файлу %1$d/%2$d</string>
   <string name="installation_failed_">невдале встановлення!</string>
   <string name="installation_successful">встановлення завершено</string>
@@ -204,7 +204,7 @@
   <string name="liveactivity_live_activity">Життєва активність</string>
   <string name="weeksteps_today_steps_description">Кроків сьогодні, мета: %1$s</string>
   <string name="pref_title_dont_ack_transfer">Не передавати дані про активність</string>
-  <string name="pref_summary_dont_ack_transfers">Якщо дані не будуть передані на пристрій, пристрій не буде очищений. Корисно, якщо Gadgetbridge використовується разом з іншими додатками.</string>
+  <string name="pref_summary_dont_ack_transfers">Якщо дані не будуть передані на пристрій, пристрій не буде очищений. Корисно, якщо Pulse використовується разом з іншими додатками.</string>
   <string name="pref_summary_keep_data_on_device">Дозволяє лишити дані на Mi-браслеті після синхронізації. Зазвичай використовується, якщо GB працює ще з іншими додатками.</string>
   <string name="live_activity_steps_history">Історія кроків</string>
   <string name="live_activity_current_steps_per_minute">Поточні кроки/хв</string>

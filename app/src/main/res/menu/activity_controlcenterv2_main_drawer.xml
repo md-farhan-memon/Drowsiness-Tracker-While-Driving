@@ -4,7 +4,7 @@
     <group
         android:checkableBehavior="single"
         android:id="@+id/applicaction_options">
-        <item android:id="@+id/action_settings"
+        <!--<item android:id="@+id/action_settings"
             android:title="@string/action_settings"
             android:icon="@drawable/ic_settings" />
         <item android:id="@+id/action_debug"
@@ -12,13 +12,13 @@
             android:icon="@drawable/ic_debug" />
         <item android:id="@+id/action_db_management"
             android:title="@string/action_db_management"
-            android:icon="@drawable/ic_database_management" />
+            android:icon="@drawable/ic_database_management" />-->
         <item android:id="@+id/action_quit"
             android:title="@string/action_quit"
             android:icon="@drawable/ic_quit" />
     </group>
 
-    <group
+    <!--<group
         android:checkableBehavior="single"
         android:id="@+id/further_options">
         <item
@@ -29,5 +29,5 @@
             android:id="@+id/external_changelog"
             android:title="@string/changelog_full_title"
             android:icon="@drawable/ic_history_black" />
-    </group>
+    </group>-->
 </menu>

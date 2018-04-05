@@ -1,7 +1,7 @@
 <?xml version='1.0' encoding='UTF-8'?>
-<resources><string name="app_name">Gadgetbridge</string>
+<resources><string name="app_name">Pulse</string>
 
-    <string name="title_activity_controlcenter">Gadgetbridge</string>
+    <string name="title_activity_controlcenter">Pulse</string>
     <string name="action_settings">Instellingen</string>
     <string name="action_debug">Debug</string>
     <string name="action_quit">Sluit af</string>
@@ -50,11 +50,11 @@
 \n 
 \nGA VERDER OP EIGEN RISICO!</string>
     <string name="fw_multi_upgrade_notice">U staat op het punt om de %1$s en %2$s firmware, te installeren in plaats van die momenteel op uw Mi Band staat.</string>
-    <string name="miband_firmware_known">Deze firmware is getest en is compatibel met Gadgetbridge.</string>
-    <string name="miband_firmware_unknown_warning">Deze firmware is niet getest en is mogelijk niet compatibel met Gadgetbridge. 
+    <string name="miband_firmware_known">Deze firmware is getest en is compatibel met Pulse.</string>
+    <string name="miband_firmware_unknown_warning">Deze firmware is niet getest en is mogelijk niet compatibel met Pulse. 
 \n 
 \nU wordt AFGERADEN om het op uw Mi Band te installeren!</string>
-    <string name="miband_firmware_suggest_whitelist">Als u nog steeds wilt doorgaan en uw apparaat blijft goed functioneren, vertel dan alstublieft de ontwikkelaars van Gadgetbridge om de %s firmware-versie op de goedgekeurde lijst te zetten</string>
+    <string name="miband_firmware_suggest_whitelist">Als u nog steeds wilt doorgaan en uw apparaat blijft goed functioneren, vertel dan alstublieft de ontwikkelaars van Pulse om de %s firmware-versie op de goedgekeurde lijst te zetten</string>
 
     <string name="title_activity_settings">Instellingen</string>
 
@@ -75,7 +75,7 @@
 
     <string name="pref_title_language">Taal</string>
 
-    <string name="pref_title_minimize_priority">Verberg de Gadgetbridge-melding</string>
+    <string name="pref_title_minimize_priority">Verberg de Pulse-melding</string>
     <string name="pref_summary_minimize_priority_off">Het pictogram in de statusbalk en de melding op het vergrendelingsscherm worden weergegeven</string>
     <string name="pref_summary_minimize_priority_on">Het pictogram in de statusbalk en de melding op het vergrendelingsscherm zijn verborgen</string>
 
@@ -192,7 +192,7 @@
     <string name="pref_title_pebble_mtu_limit">Pebble 2/LE GATT MTU limiet</string>
     <string name="pref_summary_pebble_mtu_limit">Als uw Pebble 2/Pebble LE niet werkt zoals verwacht, probeer deze instelling om de MTU te limiteren (geldig bereik: 20-512)</string>
     <string name="pref_title_pebble_enable_applogs">logging van horlogeapp inschakelen</string>
-    <string name="pref_summary_pebble_enable_applogs">Zorgt ervoor dat logs van horloge-apps gelogd zullen worden door Gadgetbridge (opnieuw verbinden vereist)</string>
+    <string name="pref_summary_pebble_enable_applogs">Zorgt ervoor dat logs van horloge-apps gelogd zullen worden door Pulse (opnieuw verbinden vereist)</string>
     <string name="pref_title_pebble_always_ack_pebblekit">Vroegtijdige ACK PebbleKit</string>
     <string name="pref_summary_pebble_always_ack_pebblekit">Zorgt ervoor dat berichten die door apps van derden worden verzonden, altijd en onmiddellijk herkend zullen worden</string>
     <string name="pref_title_pebble_enable_bgjs">Schakel achtergrond JS in</string>
@@ -213,7 +213,7 @@
     <string name="_unknown_">(onbekend)</string>
     <string name="test">Test</string>
     <string name="test_notification">Test notificatie</string>
-    <string name="this_is_a_test_notification_from_gadgetbridge">Dit is een test notificatie van Gadgetbridge</string>
+    <string name="this_is_a_test_notification_from_gadgetbridge">Dit is een test notificatie van Pulse</string>
     <string name="bluetooth_is_not_supported_">Bluetooth is niet ondersteund.</string>
     <string name="bluetooth_is_disabled_">Bluetooth is uitgeschakeld.</string>
     <string name="tap_connected_device_for_app_mananger">Tap op het verbonden toestel voor de App beheerder</string>
@@ -221,7 +221,7 @@
     <string name="tap_connected_device_for_vibration">Tap op het verbonden toestel voor vibratie</string>
     <string name="tap_a_device_to_connect">Tap op een toestel om te verbinden</string>
     <string name="cannot_connect_bt_address_invalid_">Kan niet verbinden. Is het Bluetooth adres ongeldig?</string>
-    <string name="gadgetbridge_running">Gadgetbridge loopt</string>
+    <string name="gadgetbridge_running">Pulse loopt</string>
     <string name="installing_binary_d_d">Binary installeren %1$d/%2$d</string>
     <string name="installation_failed_">Installatie gefaald</string>
     <string name="installation_successful">Geïnstalleerd</string>
@@ -552,5 +552,5 @@
     <string name="spanish">Spaans</string>
 
     <string name="choose_auto_export_location">Kies export locatie</string>
-    <string name="notification_channel_name">Gadgetbridge meldingen</string>
+    <string name="notification_channel_name">Pulse meldingen</string>
 </resources>

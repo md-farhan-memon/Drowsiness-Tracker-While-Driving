@@ -1,7 +1,7 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <resources>
-  <string name="app_name">Gadgetbridge</string>
-  <string name="title_activity_controlcenter">Gadgetbridge</string>
+  <string name="app_name">Pulse</string>
+  <string name="title_activity_controlcenter">Pulse</string>
   <string name="action_settings">Configurações</string>
   <string name="action_debug">Depurar</string>
   <string name="action_quit">Sair</string>
@@ -39,11 +39,11 @@
   <string name="title_activity_fw_app_insaller">Instalador FW/App</string>
   <string name="fw_upgrade_notice">Você está prestes a instalar o firmware %s no lugar do atual em sua Mi Band.</string>
   <string name="fw_multi_upgrade_notice">Você está prestes a instalar os firmwares %1$s e %2$s no lugar dos que estão atualmente na sua Mi Band.</string>
-  <string name="miband_firmware_known">O firmware foi testado e é compatível com Gadgetbridge.</string>
-  <string name="miband_firmware_unknown_warning">Este firmware não foi testado e pode não ser compatível com o Gadgetbridge.
+  <string name="miband_firmware_known">O firmware foi testado e é compatível com Pulse.</string>
+  <string name="miband_firmware_unknown_warning">Este firmware não foi testado e pode não ser compatível com o Pulse.
 \n
 \nNÃO recomendamos que instale em sua Mi Band!</string>
-  <string name="miband_firmware_suggest_whitelist">Se você ainda desejar continuar e tudo funcionar corretamente, por favor, diga aos desenvolvedores do Gadgetbridge para incluírem essa versão de firmware na lista: %s</string>
+  <string name="miband_firmware_suggest_whitelist">Se você ainda desejar continuar e tudo funcionar corretamente, por favor, diga aos desenvolvedores do Pulse para incluírem essa versão de firmware na lista: %s</string>
   <!--Strings related to Settings-->
   <string name="title_activity_settings">Configurações</string>
   <string name="pref_header_general">Configurações Gerais</string>
@@ -59,7 +59,7 @@
   <string name="pref_theme_light">Claro</string>
   <string name="pref_theme_dark">Escuro</string>
   <string name="pref_title_language">Idioma</string>
-  <string name="pref_title_minimize_priority">Ocultar notificações do Gadgetbridge</string>
+  <string name="pref_title_minimize_priority">Ocultar notificações do Pulse</string>
   <string name="pref_summary_minimize_priority_off">Exibir ícone na barra de status e nas notificações na tela inicial</string>
   <string name="pref_summary_minimize_priority_on">Ocultar ícone na barra de status e nas notificações na tela inicial</string>
   <string name="pref_header_notifications">Notificações</string>
@@ -125,7 +125,7 @@
   <string name="pref_title_pebble_mtu_limit">Pebble 2/LE GATT MTU limite</string>
   <string name="pref_summary_pebble_mtu_limit">Se seu Pebble 2/Pebble LE não funciona como esperado, tente esta configuração para limitar o MTU (faixa válida 20–512)</string>
   <string name="pref_title_pebble_enable_applogs">Ativas registro de Log do App do Relógio</string>
-  <string name="pref_summary_pebble_enable_applogs">Faz com que os logs de aplicativos de monitoramento sejam registrados por Gadgetbridge (exige reconectar)</string>
+  <string name="pref_summary_pebble_enable_applogs">Faz com que os logs de aplicativos de monitoramento sejam registrados por Pulse (exige reconectar)</string>
   <string name="pref_title_pebble_always_ack_pebblekit">Prematuramente ACK PebbleKit</string>
   <string name="pref_summary_pebble_always_ack_pebblekit">Isso fará com que as mensagens enviadas para aplicativos de terceiros sejam reconhecidas sempre e imediatamente</string>
   <string name="pref_title_pebble_reconnect_attempts">Tentativas de Reconexão</string>
@@ -141,7 +141,7 @@
   <string name="_unknown_">(desconhecido)</string>
   <string name="test">Teste</string>
   <string name="test_notification">Teste de notificação</string>
-  <string name="this_is_a_test_notification_from_gadgetbridge">Esta é uma Notificação de Teste de Gadgetbridge</string>
+  <string name="this_is_a_test_notification_from_gadgetbridge">Esta é uma Notificação de Teste de Pulse</string>
   <string name="bluetooth_is_not_supported_">Bluetooth não suportado.</string>
   <string name="bluetooth_is_disabled_">Bluetooth desabilitado.</string>
   <string name="tap_connected_device_for_app_mananger">Toque no dispositivo conectado</string>
@@ -149,7 +149,7 @@
   <string name="tap_connected_device_for_vibration">Toque no dispositivo conectado para Vibração</string>
   <string name="tap_a_device_to_connect">Toque num dispositivo para ligar</string>
   <string name="cannot_connect_bt_address_invalid_">Não pode conectar. Endereço BT inválido?</string>
-  <string name="gadgetbridge_running">Gadgetbridge em execução</string>
+  <string name="gadgetbridge_running">Pulse em execução</string>
   <string name="installing_binary_d_d">Instalação binária %1$d/%2$d</string>
   <string name="installation_failed_">falha na instalação!</string>
   <string name="installation_successful">instalação bem sucedida</string>
@@ -389,7 +389,7 @@
     <string name="pref_summary_auto_export_interval">Exportar a cada %d hora(s)</string>
 
     <string name="preferences_amazfitbip_settings">Ajustes do Amazfit Bit</string>
-    <string name="discovery_connected_devices_hint">Permita que seu dispositivo seja detectado. Os dispositivos já pareados não serão detectados. Para o Android 6 ou superior, é necessário habilitar a localização de GPS. Desative o Privacy Guard para o Gadgetbridge, pois o telefone poderá travar ou reiniciar caso esteja ativo. Se nenhum dispositivo for encontrado após alguns minutos, tente novamente após reiniciar seu aparelho telefônico.</string>
+    <string name="discovery_connected_devices_hint">Permita que seu dispositivo seja detectado. Os dispositivos já pareados não serão detectados. Para o Android 6 ou superior, é necessário habilitar a localização de GPS. Desative o Privacy Guard para o Pulse, pois o telefone poderá travar ou reiniciar caso esteja ativo. Se nenhum dispositivo for encontrado após alguns minutos, tente novamente após reiniciar seu aparelho telefônico.</string>
     <string name="prefs_title_heartrate_measurement_interval">Medição diária dos batimentos cardíacos</string>
     <string name="interval_one_minute">A cada minuto</string>
     <string name="interval_five_minutes">A cada 5 minutos</string>
@@ -419,5 +419,5 @@
 
     <string name="mi2_prefs_button_action">Ativar botão</string>
     <string name="mi2_prefs_button_action_vibrate">Ativar vibração</string>
-    <string name="notification_channel_name">Notificações - Gadgetbridge</string>
+    <string name="notification_channel_name">Notificações - Pulse</string>
 </resources>

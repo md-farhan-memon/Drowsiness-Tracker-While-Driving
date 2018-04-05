@@ -1,7 +1,7 @@
 <?xml version='1.0' encoding='UTF-8'?>
-<resources><string name="app_name">Gadgetbridge</string>
+<resources><string name="app_name">Pulse</string>
 
-    <string name="title_activity_controlcenter">Gadgetbridge</string>
+    <string name="title_activity_controlcenter">Pulse</string>
     <string name="action_settings">Seaded</string>
     <string name="action_debug">Silumine</string>
     <string name="action_quit">Välju</string>
@@ -63,8 +63,8 @@
 \n
 \nTESTIMATA, VÕIB TEIE SEADME PABERIRASKUSEKS MUUTA, JÄTKATE OMAL RIISIKOL!</string>
     <string name="fw_multi_upgrade_notice">Olete installimas %1$s ja %2$s püsivara selle asemel, mis praegu teie Mi Band\'il on.</string>
-    <string name="miband_firmware_known">See püsivara on testitud ja on teadaolevalt sobiv koos Gadgetbridge\'iga kasutamiseks.</string>
-    <string name="miband_firmware_unknown_warning">See püsivara on testimata ja ei pruugi olla Gadgetbridge\'iga ühilduv.
+    <string name="miband_firmware_known">See püsivara on testitud ja on teadaolevalt sobiv koos Pulse\'iga kasutamiseks.</string>
+    <string name="miband_firmware_unknown_warning">See püsivara on testimata ja ei pruugi olla Pulse\'iga ühilduv.
 \n
 \nSoovitame mitte seda teie Mi Bandile paigaldada!</string>
     <string name="title_activity_settings">Seaded</string>
@@ -79,7 +79,7 @@
     <string name="pref_title_datetime_syctimeonconnect">Sünkrooni aega</string>
     <string name="pref_summary_datetime_syctimeonconnect">Sünkrooni aeg seadmega ühendumise ajal ja kui aeg või ajatsoon muutub Androidis</string>
 
-    <string name="miband_firmware_suggest_whitelist">Kui te siiski soovite jätkata ja seade jätkab tööd ka hiljem palun andke Gadgetbridge\'i arendajatele teada, et nad lisaksid %s versiooni toetatud püsivarade nimekirja</string>
+    <string name="miband_firmware_suggest_whitelist">Kui te siiski soovite jätkata ja seade jätkab tööd ka hiljem palun andke Pulse\'i arendajatele teada, et nad lisaksid %s versiooni toetatud püsivarade nimekirja</string>
 
     <string name="pref_title_charts_swipe">Luba viiped vasakule/paremale graafikute vaates</string>
 
@@ -89,7 +89,7 @@
 
     <string name="pref_title_language">Keel</string>
 
-    <string name="pref_title_minimize_priority">Peida Gadgetbridge\'i teavitus</string>
+    <string name="pref_title_minimize_priority">Peida Pulse\'i teavitus</string>
     <string name="pref_header_notifications">Teavitused</string>
     <string name="pref_title_notifications_repetitions">Korduseid</string>
     <string name="pref_title_notifications_call">Telefonikõned</string>

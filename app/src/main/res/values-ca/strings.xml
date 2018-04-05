@@ -1,7 +1,7 @@
 <?xml version='1.0' encoding='UTF-8'?>
-<resources><string name="app_name">Gadgetbridge</string>
+<resources><string name="app_name">Pulse</string>
 
-    <string name="title_activity_controlcenter">Gadgetbridge</string>
+    <string name="title_activity_controlcenter">Pulse</string>
     <string name="action_settings">Paràmetres</string>
     <string name="action_debug">Depuració</string>
     <string name="action_quit">Sortir</string>
@@ -64,11 +64,11 @@
 \n
 \nNO TESTAT. POT ESTAVELLAR EL VOSTRE DISPOSITIU. PROCEDIU SOTA LA VOSTRA PRÒPIA RESPONSABILITAT!</string>
     <string name="fw_multi_upgrade_notice">Estàs a punt d\'instal·lar els firmwares %1$s i %2$s en lloc dels de la vostra MiBand.</string>
-    <string name="miband_firmware_known">Aquest firmware ha estat provat i se sap que és compatible amb Gadgetbridge.</string>
-    <string name="miband_firmware_unknown_warning">Aquest firmware no ha estat provat i pot ser que no sigui compatible amb Gadgetbridge.
+    <string name="miband_firmware_known">Aquest firmware ha estat provat i se sap que és compatible amb Pulse.</string>
+    <string name="miband_firmware_unknown_warning">Aquest firmware no ha estat provat i pot ser que no sigui compatible amb Pulse.
 \n
 \nNO es recomana la instal·lació en el teu MiBand!</string>
-    <string name="miband_firmware_suggest_whitelist">Si tot i així vols seguir i les coses continuen funcionant correctament, si us plau indica\'ls als desenvolupadors de Gadgetbridge que aquesta versió del firmware funciona bé: %s</string>
+    <string name="miband_firmware_suggest_whitelist">Si tot i així vols seguir i les coses continuen funcionant correctament, si us plau indica\'ls als desenvolupadors de Pulse que aquesta versió del firmware funciona bé: %s</string>
 
     <string name="title_activity_settings">Paràmetres</string>
 
@@ -90,7 +90,7 @@
 
     <string name="pref_title_language">Idioma</string>
 
-    <string name="pref_title_minimize_priority">Oculta la notificació de Gadgetbridge</string>
+    <string name="pref_title_minimize_priority">Oculta la notificació de Pulse</string>
     <string name="pref_summary_minimize_priority_off">La icona a la barra d\'estat i la notificació a la pantalla de bloqueig estan actius</string>
     <string name="pref_summary_minimize_priority_on">La icona a la barra d\'estat i la notificació a la pantalla de bloqueig estan ocults</string>
 
@@ -178,7 +178,7 @@
     <string name="pref_title_pebble_mtu_limit">Pebble 2/LI límit de GATT MTU</string>
     <string name="pref_summary_pebble_mtu_limit">Si el teu Pebble 2/Pebble LE no funciona correctament, prova aquesta opció per limitar l\'MTU (rang vàlid 20-512)</string>
     <string name="pref_title_pebble_enable_applogs">Activa els registres de les aplicacions del rellotge</string>
-    <string name="pref_summary_pebble_enable_applogs">Produirà registres de les apps del rellotge que Gadgetbridge guardarà (necessita reconnexió)</string>
+    <string name="pref_summary_pebble_enable_applogs">Produirà registres de les apps del rellotge que Pulse guardarà (necessita reconnexió)</string>
     <string name="pref_title_pebble_always_ack_pebblekit">ACK abans d\'hora de PebbleKit</string>
     <string name="pref_summary_pebble_always_ack_pebblekit">Permetrà als missatges enviats a apps de tercers ser reconeguts sempre i immediatament</string>
     <string name="pref_title_pebble_enable_bgjs">Activa JS en segon pla</string>
@@ -199,7 +199,7 @@
     <string name="_unknown_">(desconegut)</string>
     <string name="test">Prova</string>
     <string name="test_notification">Prova notificació</string>
-    <string name="this_is_a_test_notification_from_gadgetbridge">Això és una notificació de prova des de Gadgetbridge</string>
+    <string name="this_is_a_test_notification_from_gadgetbridge">Això és una notificació de prova des de Pulse</string>
     <string name="bluetooth_is_not_supported_">El Bluetooth no està suportat.</string>
     <string name="bluetooth_is_disabled_">El Bluetooth està inhabilitat.</string>
     <string name="tap_connected_device_for_app_mananger">Fes un toc al dispositiu connectat per a configurar les aplicacions</string>
@@ -207,7 +207,7 @@
     <string name="tap_connected_device_for_vibration">Fes un toc al dispositiu per vibració</string>
     <string name="tap_a_device_to_connect">Fes un toc a un dispositius per connectar</string>
     <string name="cannot_connect_bt_address_invalid_">No és pot connectar. Direcció BT incorrecta?</string>
-    <string name="gadgetbridge_running">Gadgetbridge funcionant</string>
+    <string name="gadgetbridge_running">Pulse funcionant</string>
     <string name="installing_binary_d_d">Instal·lat binari $1$d/%2$d</string>
     <string name="installation_failed_">La instal·lació ha fallat</string>
     <string name="installation_successful">Instal·lació correcta</string>

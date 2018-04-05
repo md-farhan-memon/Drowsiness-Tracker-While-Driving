@@ -241,7 +241,7 @@ public class ControlCenterv2 extends AppCompatActivity
         drawer.closeDrawer(GravityCompat.START);
 
         switch (item.getItemId()) {
-            case R.id.action_settings:
+            /*case R.id.action_settings:
                 Intent settingsIntent = new Intent(this, SettingsActivity.class);
                 startActivity(settingsIntent);
                 return true;
@@ -252,11 +252,11 @@ public class ControlCenterv2 extends AppCompatActivity
             case R.id.action_db_management:
                 Intent dbIntent = new Intent(this, DbManagementActivity.class);
                 startActivity(dbIntent);
-                return true;
+                return true;*/
             case R.id.action_quit:
                 GBApplication.quit();
                 return true;
-            case R.id.donation_link:
+            /*case R.id.donation_link:
                 Intent i = new Intent(Intent.ACTION_VIEW, Uri.parse("https://liberapay.com/Gadgetbridge")); //TODO: centralize if ever used somewhere else
                 i.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
                 startActivity(i);
@@ -264,7 +264,7 @@ public class ControlCenterv2 extends AppCompatActivity
             case R.id.external_changelog:
                 ChangeLog cl = createChangeLog();
                 cl.getFullLogDialog().show();
-                return true;
+                return true;*/
         }
 
         return true;

@@ -27,6 +27,7 @@ import android.support.v4.content.LocalBroadcastManager;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.transition.TransitionManager;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -46,6 +47,7 @@ import nodomain.freeyourgadget.gadgetbridge.R;
 import nodomain.freeyourgadget.gadgetbridge.activities.ConfigureAlarms;
 import nodomain.freeyourgadget.gadgetbridge.activities.VibrationActivity;
 import nodomain.freeyourgadget.gadgetbridge.activities.charts.ChartsActivity;
+import nodomain.freeyourgadget.gadgetbridge.com.sjain.pulse.MainActivity;
 import nodomain.freeyourgadget.gadgetbridge.devices.DeviceCoordinator;
 import nodomain.freeyourgadget.gadgetbridge.devices.DeviceManager;
 import nodomain.freeyourgadget.gadgetbridge.impl.GBDevice;
@@ -78,7 +80,7 @@ public class GBDeviceAdapterv2 extends RecyclerView.Adapter<GBDeviceAdapterv2.Vi
     }
 
     @Override
-    public void onBindViewHolder(ViewHolder holder, final int position) {
+    public void onBindViewHolder(final ViewHolder holder, final int position) {
         final GBDevice device = deviceList.get(position);
         final DeviceCoordinator coordinator = DeviceHelper.getInstance().getCoordinator(device);
 
@@ -118,6 +120,18 @@ public class GBDeviceAdapterv2 extends RecyclerView.Adapter<GBDeviceAdapterv2.Vi
             holder.deviceStatusLabel.setText(device.getStateString());
             holder.busyIndicator.setVisibility(View.INVISIBLE);
         }
+
+        holder.heartRateDevice.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Log.e("CLICKED", "HELLO");
+                if (holder.deviceStatusLabel.getText().toString().compareToIgnoreCase("Connected") == 0) {
+                    callMainActivity();
+                } else {
+                    showTransientSnackbar("Please connect to device and try again");
+                }
+            }
+        });
 
         //begin of action row
         //battery
@@ -319,6 +333,11 @@ public class GBDeviceAdapterv2 extends RecyclerView.Adapter<GBDeviceAdapterv2.Vi
         return deviceList.size();
     }
 
+    private void callMainActivity() {
+        Intent i = new Intent(context, MainActivity.class);
+        context.startActivity(i);
+    }
+
     static class ViewHolder extends RecyclerView.ViewHolder {
 
         CardView container;
@@ -345,6 +364,7 @@ public class GBDeviceAdapterv2 extends RecyclerView.Adapter<GBDeviceAdapterv2.Vi
         ListView deviceInfoList;
         ImageView findDevice;
         ImageView removeDevice;
+        ImageView heartRateDevice;
 
         ViewHolder(View view) {
             super(view);
@@ -372,6 +392,7 @@ public class GBDeviceAdapterv2 extends RecyclerView.Adapter<GBDeviceAdapterv2.Vi
             deviceInfoList = (ListView) view.findViewById(R.id.device_item_infos);
             findDevice = (ImageView) view.findViewById(R.id.device_action_find);
             removeDevice = (ImageView) view.findViewById(R.id.device_action_remove);
+            heartRateDevice = (ImageView) view.findViewById(R.id.device_heart_rate);
         }
 
     }
@@ -434,6 +455,19 @@ public class GBDeviceAdapterv2 extends RecyclerView.Adapter<GBDeviceAdapterv2.Vi
         TextView textView = (TextView) snackbarView.findViewById(snackbarTextId);
         //textView.setTextColor();
         //snackbarView.setBackgroundColor(Color.MAGENTA);
+        snackbar.show();
+    }
+
+    private void showTransientSnackbar(String resource) {
+        Snackbar snackbar = Snackbar.make(parent, resource, Snackbar.LENGTH_SHORT);
+
+//        View snackbarView = snackbar.getView();
+//
+//// change snackbar text color
+//        int snackbarTextId = android.support.design.R.id.snackbar_text;
+//        TextView textView = (TextView) snackbarView.findViewById(snackbarTextId);
+//        //textView.setTextColor();
+//        //snackbarView.setBackgroundColor(Color.MAGENTA);
         snackbar.show();
     }
 

@@ -1,7 +1,7 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <resources>
-  <string name="app_name">Gadgetbridge</string>
-  <string name="title_activity_controlcenter">Gadgetbridge</string>
+  <string name="app_name">Pulse</string>
+  <string name="title_activity_controlcenter">Pulse</string>
   <string name="action_settings">Ustawienia</string>
   <string name="action_debug">Debuguj</string>
   <string name="action_quit">Zakończ</string>
@@ -34,11 +34,11 @@
   <!--Strings related to FwAppInstaller-->
   <string name="title_activity_fw_app_insaller">Instalator FW/Aplikacji</string>
   <string name="fw_upgrade_notice">Masz zamiar zainstalować firmware %s zamiast aktualnie zainstalowanego na twoim Mi Band.</string>
-  <string name="miband_firmware_known">Ten firmware został przetestowany i jest kompatybilny z Gadgetbridge.</string>
-  <string name="miband_firmware_unknown_warning">Ten firmware nie jest przetestowany i może być nie kompatybilny z Gadgetbridge.
+  <string name="miband_firmware_known">Ten firmware został przetestowany i jest kompatybilny z Pulse.</string>
+  <string name="miband_firmware_unknown_warning">Ten firmware nie jest przetestowany i może być nie kompatybilny z Pulse.
 \n
 \n Nie zalecamy wgrywania na twój Mi Band!</string>
-  <string name="miband_firmware_suggest_whitelist">Jeśli nadal chcesz kontynuować i po instalacji wszystko działa prawidłowo, proszę powiadom programistów Gadgetbridge by dodali wersję firmware: %s do białej listy</string>
+  <string name="miband_firmware_suggest_whitelist">Jeśli nadal chcesz kontynuować i po instalacji wszystko działa prawidłowo, proszę powiadom programistów Pulse by dodali wersję firmware: %s do białej listy</string>
   <!--Strings related to Settings-->
   <string name="title_activity_settings">Ustawienia</string>
   <string name="pref_header_general">Ustawienia ogólne</string>
@@ -103,13 +103,13 @@
   <string name="_unknown_">(nieznane)</string>
   <string name="test">Test</string>
   <string name="test_notification">Test powiadomień</string>
-  <string name="this_is_a_test_notification_from_gadgetbridge">To jest testowe powiadomienie z Gadgetbridge</string>
+  <string name="this_is_a_test_notification_from_gadgetbridge">To jest testowe powiadomienie z Pulse</string>
   <string name="bluetooth_is_not_supported_">Bluetooth nie jest obsługiwane.</string>
   <string name="bluetooth_is_disabled_">Bluetooth jest wyłączony.</string>
   <string name="tap_connected_device_for_app_mananger">Kliknij połączone urządzenie, aby uruchomić menadżer aplikacji</string>
   <string name="tap_a_device_to_connect">Dotknij urządzenie aby połączyć</string>
   <string name="cannot_connect_bt_address_invalid_">Nie można połączyć. Adres Bluetooth nieprawidłowy?</string>
-  <string name="gadgetbridge_running">Gadgetbridge działa</string>
+  <string name="gadgetbridge_running">Pulse działa</string>
   <string name="installing_binary_d_d">Instalowanie binarki %1$d/%2$d</string>
   <string name="installation_failed_">Instalacja nie powiodła się</string>
   <string name="installation_successful">Instalacja powiodła się</string>
@@ -218,8 +218,8 @@
   <string name="liveactivity_live_activity">Ostatnia aktywność</string>
   <string name="weeksteps_today_steps_description">Kroków dziś, cel: %1$s</string>
   <string name="pref_title_dont_ack_transfer">Nie wysyłaj danych aktywności</string>
-  <string name="pref_summary_dont_ack_transfers">Gdy dane aktywności nie są przesłane na opaskę, wtedy nie będą usuwane. Przydatne gdy Gadgetbridge jest używany wraz z innymi aplikacjami.</string>
-  <string name="pref_summary_keep_data_on_device">Dane aktywności będą zachowane na Mi Band nawet po synchronizacji. Przydatne gdy Gadgetbridge jest używany z innymi aplikacjami.</string>
+  <string name="pref_summary_dont_ack_transfers">Gdy dane aktywności nie są przesłane na opaskę, wtedy nie będą usuwane. Przydatne gdy Pulse jest używany wraz z innymi aplikacjami.</string>
+  <string name="pref_summary_keep_data_on_device">Dane aktywności będą zachowane na Mi Band nawet po synchronizacji. Przydatne gdy Pulse jest używany z innymi aplikacjami.</string>
   <string name="pref_summary_low_latency_fw_update">To może pomóc na urządzeniach gdzie uaktualnienie kończy się błędem</string>
   <string name="live_activity_steps_history">Historia kroków</string>
   <string name="live_activity_current_steps_per_minute">Aktualnie kroków/min</string>
@@ -278,7 +278,7 @@
     <string name="title_activity_calblacklist">Czarna lista kalendarzy</string>
 
     <string name="pref_title_general_autostartonboot">Uruchom automatycznie</string>
-    <string name="pref_title_minimize_priority">Ukryj powiadomienia z Gadgetbridge</string>
+    <string name="pref_title_minimize_priority">Ukryj powiadomienia z Pulse</string>
     <string name="pref_summary_minimize_priority_off">Ikona na pasku stanu i powiadomienia na zablokowanym ekranie pokazują się</string>
     <string name="pref_summary_minimize_priority_on">Ikona na pasku stanu i powiadomienia na zablokowanym ekranie są ukryte</string>
 

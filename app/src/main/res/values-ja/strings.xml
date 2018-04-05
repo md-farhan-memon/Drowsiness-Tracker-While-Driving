@@ -48,10 +48,10 @@
   <string name="fw_upgrade_notice">お使いのMi Bandに、現在のファームウェアの代わりに%sをインストールしようとしています。</string>
   <string name="fw_multi_upgrade_notice">お使いのMi Bandに、現在のファームウェアの代わりに %1$s および %2$s をインストールしようとしています。</string>
   <string name="miband_firmware_known">このファームウェアはテスト済で、ガジェットブリッジと互換性があることがわかっています。</string>
-  <string name="miband_firmware_unknown_warning">このファームウェアは未テストで、Gadgetbridge と互換性がない可能性があります。
+  <string name="miband_firmware_unknown_warning">このファームウェアは未テストで、Pulse と互換性がない可能性があります。
 \n
 \nお使いのMi Bandにフラッシュすることは推奨されません!</string>
-  <string name="miband_firmware_suggest_whitelist">それでも続行して、正しく動作した場合は、Gadgetbridge開発者にホワイトリストの %s ファームウェア バージョンを教えてください</string>
+  <string name="miband_firmware_suggest_whitelist">それでも続行して、正しく動作した場合は、Pulse開発者にホワイトリストの %s ファームウェア バージョンを教えてください</string>
   <!--Strings related to Settings-->
   <string name="title_activity_settings">設定</string>
   <string name="pref_header_general">全般設定</string>
@@ -138,7 +138,7 @@
   <string name="pref_title_pebble_mtu_limit">Pebble 2/LE GATT MTU 制限</string>
   <string name="pref_summary_pebble_mtu_limit">Pebble 2/Pebble LE が期待どおりに機能しない場合は、この設定を試して MTU を制限してください (有効範囲 20-512)</string>
   <string name="pref_title_pebble_enable_applogs">ウォッチアプリのログ記録を有効にする</string>
-  <string name="pref_summary_pebble_enable_applogs">Gadgetbridgeがウォッチアプリからログを記録するようにする (再接続が必要です)</string>
+  <string name="pref_summary_pebble_enable_applogs">Pulseがウォッチアプリからログを記録するようにする (再接続が必要です)</string>
   <string name="pref_title_pebble_always_ack_pebblekit">早期 ACK PebbleKit</string>
   <string name="pref_summary_pebble_always_ack_pebblekit">外部のサードパーティアプリケーションに送信されたメッセージは、常に即座に承認されます</string>
   <string name="pref_title_pebble_reconnect_attempts">再接続の試行</string>
@@ -496,5 +496,5 @@
 
     <string name="devicetype_xwatch">XWatch</string>
 
-    <string name="notification_channel_name">Gadgetbridge 通知</string>
+    <string name="notification_channel_name">Pulse 通知</string>
 </resources>
