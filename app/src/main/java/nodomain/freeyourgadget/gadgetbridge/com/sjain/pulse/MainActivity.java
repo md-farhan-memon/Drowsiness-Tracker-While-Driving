@@ -97,8 +97,8 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.C
     public LocationRequest mLocationRequest;
     private PendingResult<LocationSettingsResult> pendingResult;
 
-    private static long restTimer = 5 * 60 * 1000;
-    private static long DriveTimer = 2 * 60 * 60 * 1000;
+    private static long restTimer = 30 * 1000; /*5 * 60 * 1000*/
+    private static long DriveTimer = 60 * 1000; /*2 * 60 * 60 * 1000*/
 
     private boolean drivetimerRunning = false;
     private boolean resttimerRunning = false;
@@ -380,7 +380,7 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.C
                         resetTimer();
                     }
                 });
-        if (alert == null || alert != null && !alert.isShowing()) {
+        if (alert == null || alert != null && !alert.isShowing() && !isFinishing()) {
             alert = builder.create();
             alert.show();
         }
@@ -402,7 +402,7 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.C
                         resetTimer();
                     }
                 });
-        if (alert1 == null || alert1 != null && !alert1.isShowing()) {
+        if (alert1 == null || alert1 != null && !alert1.isShowing() && !isFinishing()) {
             alert1 = builder.create();
             alert1.show();
         }
