@@ -48,6 +48,7 @@
                     android:background="?android:attr/selectableItemBackground"
                     android:clickable="true"
                     android:contentDescription="@string/controlcenter_delete_device"
+                    android:focusable="true"
                     android:tint="?attr/textColorTertiary"
                     card_view:srcCompat="@drawable/ic_remove_device" />
             </RelativeLayout>
@@ -62,6 +63,7 @@
                 android:background="?android:attr/selectableItemBackground"
                 android:clickable="true"
                 android:contentDescription="@string/candidate_item_device_image"
+                android:focusable="true"
                 android:longClickable="true"
                 android:src="@drawable/ic_device_pebble" />
 
@@ -103,6 +105,7 @@
                 android:background="?android:attr/selectableItemBackground"
                 android:clickable="true"
                 android:contentDescription="@string/candidate_item_device_image"
+                android:focusable="true"
                 android:tint="@color/secondarytext"
                 card_view:srcCompat="@drawable/ic_more_vert" />
 
@@ -154,6 +157,7 @@
                     android:background="?android:attr/selectableItemBackground"
                     android:clickable="true"
                     android:contentDescription="@string/controlcenter_fetch_activity_data"
+                    android:focusable="true"
                     android:padding="4dp"
                     android:scaleType="fitXY"
                     android:tint="@color/secondarytext"
@@ -180,6 +184,7 @@
                 android:background="?android:attr/selectableItemBackground"
                 android:clickable="true"
                 android:contentDescription="@string/controlcenter_take_screenshot"
+                android:focusable="true"
                 android:padding="4dp"
                 android:scaleType="fitXY"
                 android:tint="@color/secondarytext"
@@ -195,6 +200,7 @@
                 android:background="?android:attr/selectableItemBackground"
                 android:clickable="true"
                 android:contentDescription="@string/title_activity_appmanager"
+                android:focusable="true"
                 android:padding="4dp"
                 android:scaleType="fitXY"
                 android:tint="@color/secondarytext"
@@ -210,6 +216,7 @@
                 android:background="?android:attr/selectableItemBackground"
                 android:clickable="true"
                 android:contentDescription="@string/controlcenter_start_configure_alarms"
+                android:focusable="true"
                 android:padding="4dp"
                 android:scaleType="fitXY"
                 android:tint="@color/secondarytext"
@@ -225,10 +232,27 @@
                 android:background="?android:attr/selectableItemBackground"
                 android:clickable="true"
                 android:contentDescription="@string/controlcenter_start_activitymonitor"
+                android:focusable="true"
                 android:padding="4dp"
                 android:scaleType="fitXY"
                 android:tint="@color/secondarytext"
                 card_view:srcCompat="@drawable/ic_activity_graphs" />
+
+            <ImageView
+                android:id="@+id/device_action_show_activity_tracks"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_below="@id/device_image"
+                android:layout_margin="4dp"
+                android:layout_toEndOf="@id/device_action_show_activity_graphs"
+                android:background="?android:attr/selectableItemBackground"
+                android:clickable="true"
+                android:contentDescription="@string/controlcenter_start_activity_tracks"
+                android:focusable="true"
+                android:padding="4dp"
+                android:scaleType="fitXY"
+                android:tint="@color/secondarytext"
+                card_view:srcCompat="@drawable/ic_activity_tracks" />
 
             <ImageView
                 android:id="@+id/device_action_find"
@@ -236,9 +260,10 @@
                 android:layout_height="40dp"
                 android:layout_below="@id/device_image"
                 android:layout_margin="4dp"
-                android:layout_toEndOf="@id/device_action_show_activity_graphs"
+                android:layout_toEndOf="@id/device_action_show_activity_tracks"
                 android:clickable="true"
                 android:contentDescription="@string/controlcenter_find_device"
+                android:focusable="true"
                 android:padding="4dp"
                 android:scaleType="fitXY"
                 android:tint="@color/secondarytext"

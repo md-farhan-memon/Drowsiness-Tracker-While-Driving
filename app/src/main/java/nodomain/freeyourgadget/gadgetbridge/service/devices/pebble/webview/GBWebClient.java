@@ -41,16 +41,10 @@ import java.io.ByteArrayInputStream;
 import java.util.GregorianCalendar;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.concurrent.CountDownLatch;
 
 import nodomain.freeyourgadget.gadgetbridge.GBApplication;
 import nodomain.freeyourgadget.gadgetbridge.model.Weather;
-
-import static nodomain.freeyourgadget.gadgetbridge.util.WebViewSingleton.internetHelper;
-import static nodomain.freeyourgadget.gadgetbridge.util.WebViewSingleton.internetHelperBound;
-import static nodomain.freeyourgadget.gadgetbridge.util.WebViewSingleton.internetHelperListener;
-import static nodomain.freeyourgadget.gadgetbridge.util.WebViewSingleton.internetResponse;
-import static nodomain.freeyourgadget.gadgetbridge.util.WebViewSingleton.latch;
+import nodomain.freeyourgadget.gadgetbridge.util.WebViewSingleton;
 
 public class GBWebClient extends WebViewClient {
 
@@ -85,19 +79,14 @@ public class GBWebClient extends WebViewClient {
 
     private WebResourceResponse mimicReply(Uri requestedUri) {
         if (requestedUri.getHost() != null && (StringUtils.indexOfAny(requestedUri.getHost(), AllowedDomains) != -1)) {
-            if (GBApplication.getGBPrefs().isBackgroundJsEnabled() && internetHelperBound) {
+            if (GBApplication.getGBPrefs().isBackgroundJsEnabled() && WebViewSingleton.getInstance().internetHelperBound) {
                 LOG.debug("WEBVIEW forwarding request to the internet helper");
                 Bundle bundle = new Bundle();
                 bundle.putString("URL", requestedUri.toString());
                 Message webRequest = Message.obtain();
-                webRequest.replyTo = internetHelperListener;
                 webRequest.setData(bundle);
                 try {
-                    latch = new CountDownLatch(1); //the messenger should run on a single thread, hence we don't need to be worried about concurrency. This approach however is certainly not ideal.
-                    internetHelper.send(webRequest);
-                    latch.await();
-                    return internetResponse;
-
+                    return WebViewSingleton.getInstance().send(webRequest);
                 } catch (RemoteException | InterruptedException e) {
                     LOG.warn("Error downloading data from " + requestedUri, e);
                 }
@@ -171,6 +160,8 @@ public class GBWebClient extends WebViewClient {
                 JSONObject main = resp.getJSONObject("main");
 
                 convertTemps(main, units); //caller might want different units
+                JSONObject wind = resp.getJSONObject("wind");
+                convertSpeeds(wind, units);
 
                 resp.put("cod", 200);
                 resp.put("coord", coordObject(currentPosition));
@@ -224,6 +215,14 @@ public class GBWebClient extends WebViewClient {
         sys.put("sunset", (sunrise[2].getTimeInMillis() / 1000));
 
         return sys;
+    }
+
+    private static void convertSpeeds(JSONObject wind, String units) throws JSONException {
+        if ("metric".equals(units)) {
+            wind.put("speed", (wind.getDouble("speed") * 3.6f) );
+        } else if ("imperial".equals(units)) { //it's 2018... this is so sad
+            wind.put("speed", (wind.getDouble("speed") * 2.237f) );
+        }
     }
 
     private static void convertTemps(JSONObject main, String units) throws JSONException {

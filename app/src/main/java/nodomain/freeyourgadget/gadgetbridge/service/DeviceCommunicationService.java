@@ -86,7 +86,7 @@ import static nodomain.freeyourgadget.gadgetbridge.model.DeviceService.ACTION_DI
 import static nodomain.freeyourgadget.gadgetbridge.model.DeviceService.ACTION_ENABLE_HEARTRATE_SLEEP_SUPPORT;
 import static nodomain.freeyourgadget.gadgetbridge.model.DeviceService.ACTION_ENABLE_REALTIME_HEARTRATE_MEASUREMENT;
 import static nodomain.freeyourgadget.gadgetbridge.model.DeviceService.ACTION_ENABLE_REALTIME_STEPS;
-import static nodomain.freeyourgadget.gadgetbridge.model.DeviceService.ACTION_FETCH_ACTIVITY_DATA;
+import static nodomain.freeyourgadget.gadgetbridge.model.DeviceService.ACTION_FETCH_RECORDED_DATA;
 import static nodomain.freeyourgadget.gadgetbridge.model.DeviceService.ACTION_FIND_DEVICE;
 import static nodomain.freeyourgadget.gadgetbridge.model.DeviceService.ACTION_HEARTRATE_TEST;
 import static nodomain.freeyourgadget.gadgetbridge.model.DeviceService.ACTION_INSTALL;
@@ -150,6 +150,7 @@ import static nodomain.freeyourgadget.gadgetbridge.model.DeviceService.EXTRA_NOT
 import static nodomain.freeyourgadget.gadgetbridge.model.DeviceService.EXTRA_NOTIFICATION_SUBJECT;
 import static nodomain.freeyourgadget.gadgetbridge.model.DeviceService.EXTRA_NOTIFICATION_TITLE;
 import static nodomain.freeyourgadget.gadgetbridge.model.DeviceService.EXTRA_NOTIFICATION_TYPE;
+import static nodomain.freeyourgadget.gadgetbridge.model.DeviceService.EXTRA_RECORDED_DATA_TYPES;
 import static nodomain.freeyourgadget.gadgetbridge.model.DeviceService.EXTRA_URI;
 import static nodomain.freeyourgadget.gadgetbridge.model.DeviceService.EXTRA_VIBRATION_INTENSITY;
 import static nodomain.freeyourgadget.gadgetbridge.model.DeviceService.EXTRA_WEATHER;
@@ -216,7 +217,6 @@ public class DeviceCommunicationService extends Service implements SharedPrefere
                     mGBDevice = device;
                     boolean enableReceivers = mDeviceSupport != null && (mDeviceSupport.useAutoConnect() || mGBDevice.isInitialized());
                     setReceiversEnableState(enableReceivers, mGBDevice.isInitialized(), DeviceHelper.getInstance().getCoordinator(device));
-                    GB.updateNotification(mGBDevice, context);
                 } else {
                     LOG.error("Got ACTION_DEVICE_CHANGED from unexpected device: " + device);
                 }
@@ -355,7 +355,7 @@ public class DeviceCommunicationService extends Service implements SharedPrefere
                         || (notificationSpec.type == NotificationType.GENERIC_SMS && notificationSpec.phoneNumber != null)) {
                     // NOTE: maybe not where it belongs
                     if (prefs.getBoolean("pebble_force_untested", false)) {
-                        // I would rather like to save that as an array in ShadredPreferences
+                        // I would rather like to save that as an array in SharedPreferences
                         // this would work but I dont know how to do the same in the Settings Activity's xml
                         ArrayList<String> replies = new ArrayList<>();
                         for (int i = 1; i <= 16; i++) {
@@ -401,17 +401,19 @@ public class DeviceCommunicationService extends Service implements SharedPrefere
                 mDeviceSupport.onHeartRateTest();
                 break;
             }
-            case ACTION_FETCH_ACTIVITY_DATA: {
-                mDeviceSupport.onFetchActivityData();
+            case ACTION_FETCH_RECORDED_DATA: {
+                int dataTypes = intent.getIntExtra(EXTRA_RECORDED_DATA_TYPES, 0);
+                mDeviceSupport.onFetchRecordedData(dataTypes);
                 break;
             }
             case ACTION_DISCONNECT: {
                 mDeviceSupport.dispose();
-                if (mGBDevice != null && mGBDevice.getState() == GBDevice.State.WAITING_FOR_RECONNECT) {
-                    setReceiversEnableState(false, false, null);
+                if (mGBDevice != null) {
                     mGBDevice.setState(GBDevice.State.NOT_CONNECTED);
                     mGBDevice.sendDeviceUpdateIntent(this);
                 }
+                setReceiversEnableState(false, false, null);
+                mGBDevice = null;
                 mDeviceSupport = null;
                 break;
             }
