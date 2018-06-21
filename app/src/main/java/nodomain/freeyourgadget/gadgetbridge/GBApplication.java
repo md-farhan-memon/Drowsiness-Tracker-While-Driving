@@ -43,6 +43,9 @@ import android.support.v4.content.LocalBroadcastManager;
 import android.util.Log;
 import android.util.TypedValue;
 
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.iid.FirebaseInstanceId;
+
 import java.io.File;
 import java.io.IOException;
 import java.util.HashSet;
@@ -66,6 +69,7 @@ import nodomain.freeyourgadget.gadgetbridge.model.DeviceService;
 import nodomain.freeyourgadget.gadgetbridge.service.NotificationCollectorMonitorService;
 import nodomain.freeyourgadget.gadgetbridge.service.receivers.GBAutoFetchReceiver;
 import nodomain.freeyourgadget.gadgetbridge.util.AndroidUtils;
+import nodomain.freeyourgadget.gadgetbridge.util.ERPrefs;
 import nodomain.freeyourgadget.gadgetbridge.util.FileUtils;
 import nodomain.freeyourgadget.gadgetbridge.util.GB;
 import nodomain.freeyourgadget.gadgetbridge.util.GBPrefs;
@@ -79,17 +83,21 @@ import static nodomain.freeyourgadget.gadgetbridge.util.GB.NOTIFICATION_CHANNEL_
  * logging and DB access.
  */
 public class GBApplication extends Application {
+    public static final String DATABASE_NAME = "Gadgetbridge";
+    public static final String ACTION_QUIT
+            = "nodomain.freeyourgadget.gadgetbridge.gbapplication.action.quit";
+    public static final String ACTION_LANGUAGE_CHANGE = "nodomain.freeyourgadget.gadgetbridge.gbapplication.action.language_change";
     // Since this class must not log to slf4j, we use plain android.util.Log
     private static final String TAG = "GBApplication";
-    public static final String DATABASE_NAME = "Gadgetbridge";
-
-    private static GBApplication context;
     private static final Lock dbLock = new ReentrantLock();
-    private static DeviceService deviceService;
-    private static SharedPreferences sharedPrefs;
     private static final String PREFS_VERSION = "shared_preferences_version";
     //if preferences have to be migrated, increment the following and add the migration logic in migratePrefs below; see http://stackoverflow.com/questions/16397848/how-can-i-migrate-android-preferences-with-a-new-version
     private static final int CURRENT_PREFS_VERSION = 2;
+    public static FirebaseDatabase mFirebaseDatabase;
+    public static String LOG_TAG = "MYACCELROMETER";
+    private static GBApplication context;
+    private static DeviceService deviceService;
+    private static SharedPreferences sharedPrefs;
     private static LimitedQueue mIDSenderLookup = new LimitedQueue(16);
     private static Prefs prefs;
     private static GBPrefs gbPrefs;
@@ -98,13 +106,9 @@ public class GBApplication extends Application {
      * Note: is null on Lollipop and Kitkat
      */
     private static NotificationManager notificationManager;
-
-    public static final String ACTION_QUIT
-            = "nodomain.freeyourgadget.gadgetbridge.gbapplication.action.quit";
-    public static final String ACTION_LANGUAGE_CHANGE = "nodomain.freeyourgadget.gadgetbridge.gbapplication.action.language_change";
-
     private static GBApplication app;
 
+    private static ERPrefs mPrefs;
     private static Logging logging = new Logging() {
         @Override
         protected String createLogDirectory() throws IOException {
@@ -117,9 +121,23 @@ public class GBApplication extends Application {
         }
     };
     private static Locale language;
-
+    private static HashSet<String> apps_notification_blacklist = null;
+    private static HashSet<String> apps_pebblemsg_blacklist = null;
+    private static HashSet<String> calendars_blacklist = null;
     private DeviceManager deviceManager;
     private BluetoothStateChangeReceiver bluetoothStateChangeReceiver;
+
+    public GBApplication() {
+        context = this;
+        // don't do anything here, add it to onCreate instead
+    }
+
+    public static ERPrefs getERPrefs() {
+        if (mPrefs == null) {
+            mPrefs = ERPrefs.getInstance(context);
+        }
+        return mPrefs;
+    }
 
     public static void quit() {
         GB.log("Quitting Gadgetbridge...", GB.INFO, null);
@@ -128,114 +146,12 @@ public class GBApplication extends Application {
         GBApplication.deviceService().quit();
     }
 
-    public GBApplication() {
-        context = this;
-        // don't do anything here, add it to onCreate instead
-    }
-
     public static Logging getLogging() {
         return logging;
     }
 
-    protected DeviceService createDeviceService() {
-        return new GBDeviceService(this);
-    }
-
-    @Override
-    public void onCreate() {
-        app = this;
-        super.onCreate();
-
-        if (lockHandler != null) {
-            // guard against multiple invocations (robolectric)
-            return;
-        }
-
-        sharedPrefs = PreferenceManager.getDefaultSharedPreferences(context);
-        prefs = new Prefs(sharedPrefs);
-        gbPrefs = new GBPrefs(prefs);
-
-        if (!GBEnvironment.isEnvironmentSetup()) {
-            GBEnvironment.setupEnvironment(GBEnvironment.createDeviceEnvironment());
-            // setup db after the environment is set up, but don't do it in test mode
-            // in test mode, it's done individually, see TestBase
-            setupDatabase();
-        }
-
-        // don't do anything here before we set up logging, otherwise
-        // slf4j may be implicitly initialized before we properly configured it.
-        setupLogging(isFileLoggingEnabled());
-
-        if (getPrefsFileVersion() != CURRENT_PREFS_VERSION) {
-            migratePrefs(getPrefsFileVersion());
-        }
-
-        setupExceptionHandler();
-
-        deviceManager = new DeviceManager(this);
-        String language = prefs.getString("language", "default");
-        setLanguage(language);
-
-        deviceService = createDeviceService();
-        loadAppsNotifBlackList();
-        loadAppsPebbleBlackList();
-        loadCalendarsBlackList();
-
-        if (isRunningMarshmallowOrLater()) {
-            notificationManager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
-            //the following will ensure the notification manager is kept alive
-            if(isRunningOreoOrLater()) {
-                NotificationChannel channel = notificationManager.getNotificationChannel(NOTIFICATION_CHANNEL_ID);
-                if(channel == null) {
-                    channel = new NotificationChannel(NOTIFICATION_CHANNEL_ID,
-                            getString(R.string.notification_channel_name),
-                            NotificationManager.IMPORTANCE_LOW);
-                    notificationManager.createNotificationChannel(channel);
-                }
-
-                bluetoothStateChangeReceiver = new BluetoothStateChangeReceiver();
-                registerReceiver(bluetoothStateChangeReceiver, new IntentFilter(BluetoothAdapter.ACTION_STATE_CHANGED));
-            }
-            startService(new Intent(this, NotificationCollectorMonitorService.class));
-        }
-
-        if (prefs.getBoolean("auto_fetch_enabled", false)) {
-            registerReceiver(new GBAutoFetchReceiver(), new IntentFilter("android.intent.action.USER_PRESENT"));
-        }
-    }
-
-    @Override
-    public void onTrimMemory(int level) {
-        super.onTrimMemory(level);
-        if (level >= TRIM_MEMORY_BACKGROUND) {
-            if (!hasBusyDevice()) {
-                DBHelper.clearSession();
-            }
-        }
-    }
-
-    /**
-     * Returns true if at least a single device is busy, e.g synchronizing activity data
-     * or something similar.
-     * Note: busy is not the same as connected or initialized!
-     */
-    private boolean hasBusyDevice() {
-        List<GBDevice> devices = getDeviceManager().getDevices();
-        for (GBDevice device : devices) {
-            if (device.isBusy()) {
-                return true;
-            }
-        }
-        return false;
-    }
-
     public static void setupLogging(boolean enabled) {
         logging.setupLogging(enabled);
-    }
-
-    private void setupExceptionHandler() {
-        LoggingExceptionHandler handler = new LoggingExceptionHandler(Thread.getDefaultUncaughtExceptionHandler());
-        Thread.setDefaultUncaughtExceptionHandler(handler);
     }
 
     public static boolean isFileLoggingEnabled() {
@@ -244,22 +160,6 @@ public class GBApplication extends Application {
 
     public static boolean minimizeNotification() {
         return prefs.getBoolean("minimize_priority", false);
-    }
-
-    public void setupDatabase() {
-        DaoMaster.OpenHelper helper;
-        GBEnvironment env = GBEnvironment.env();
-        if (env.isTest()) {
-            helper = new DaoMaster.DevOpenHelper(this, null, null);
-        } else {
-            helper = new DBOpenHelper(this, DATABASE_NAME, null);
-        }
-        SQLiteDatabase db = helper.getWritableDatabase();
-        DaoMaster daoMaster = new DaoMaster(db);
-        if (lockHandler == null) {
-            lockHandler = new LockHandler();
-        }
-        lockHandler.init(daoMaster, helper);
     }
 
     public static Context getContext() {
@@ -317,11 +217,12 @@ public class GBApplication extends Application {
     public static boolean isRunningMarshmallowOrLater() {
         return VERSION.SDK_INT >= Build.VERSION_CODES.M;
     }
+
     public static boolean isRunningNougatOrLater() {
         return VERSION.SDK_INT >= Build.VERSION_CODES.N;
     }
 
-    public static boolean isRunningOreoOrLater(){
+    public static boolean isRunningOreoOrLater() {
         return VERSION.SDK_INT >= Build.VERSION_CODES.O;
     }
 
@@ -378,8 +279,6 @@ public class GBApplication extends Application {
         return NotificationManager.INTERRUPTION_FILTER_ALL;
     }
 
-    private static HashSet<String> apps_notification_blacklist = null;
-
     public static boolean appIsNotifBlacklisted(String packageName) {
         if (apps_notification_blacklist == null) {
             GB.log("appIsNotifBlacklisted: apps_notification_blacklist is null!", GB.INFO, null);
@@ -429,8 +328,6 @@ public class GBApplication extends Application {
         apps_notification_blacklist.remove(packageName);
         saveAppsNotifBlackList();
     }
-
-    private static HashSet<String> apps_pebblemsg_blacklist = null;
 
     public static boolean appIsPebbleBlacklisted(String sender) {
         if (apps_pebblemsg_blacklist == null) {
@@ -482,16 +379,14 @@ public class GBApplication extends Application {
         saveAppsPebbleBlackList();
     }
 
-public static String packageNameToPebbleMsgSender(String packageName) {
-    if ("eu.siacs.conversations".equals(packageName)){
-        return("Conversations");
-    } else if ("net.osmand.plus".equals(packageName)) {
-        return("OsmAnd");
+    public static String packageNameToPebbleMsgSender(String packageName) {
+        if ("eu.siacs.conversations".equals(packageName)) {
+            return ("Conversations");
+        } else if ("net.osmand.plus".equals(packageName)) {
+            return ("OsmAnd");
+        }
+        return packageName;
     }
-    return packageName;
-}
-
-    private static HashSet<String> calendars_blacklist = null;
 
     public static boolean calendarIsBlacklisted(String calendarDisplayName) {
         if (calendars_blacklist == null) {
@@ -571,6 +466,186 @@ public static String packageNameToPebbleMsgSender(String packageName) {
         return result;
     }
 
+    public static void updateLanguage(Locale locale) {
+        AndroidUtils.setLanguage(context, locale);
+
+        Intent intent = new Intent();
+        intent.setAction(ACTION_LANGUAGE_CHANGE);
+        LocalBroadcastManager.getInstance(context).sendBroadcast(intent);
+    }
+
+    public static LimitedQueue getIDSenderLookup() {
+        return mIDSenderLookup;
+    }
+
+    public static boolean isDarkThemeEnabled() {
+        return prefs.getString("pref_key_theme", context.getString(R.string.pref_theme_value_light)).equals(context.getString(R.string.pref_theme_value_dark));
+    }
+
+    public static int getTextColor(Context context) {
+        TypedValue typedValue = new TypedValue();
+        Resources.Theme theme = context.getTheme();
+        theme.resolveAttribute(R.attr.textColorPrimary, typedValue, true);
+        return typedValue.data;
+    }
+
+    public static int getBackgroundColor(Context context) {
+        TypedValue typedValue = new TypedValue();
+        Resources.Theme theme = context.getTheme();
+        theme.resolveAttribute(android.R.attr.background, typedValue, true);
+        return typedValue.data;
+    }
+
+    public static Prefs getPrefs() {
+        return prefs;
+    }
+
+    public static GBPrefs getGBPrefs() {
+        return gbPrefs;
+    }
+
+    public static GBApplication app() {
+        return app;
+    }
+
+    public static Locale getLanguage() {
+        return language;
+    }
+
+    public static void setLanguage(String lang) {
+        if (lang.equals("default")) {
+            language = Resources.getSystem().getConfiguration().locale;
+        } else {
+            language = new Locale(lang);
+        }
+        updateLanguage(language);
+    }
+
+    public static FirebaseDatabase getFirebaseDatabase() {
+        if (mFirebaseDatabase != null) {
+            return mFirebaseDatabase;
+        } else {
+            FirebaseDatabase mFirebaseDatabase = FirebaseDatabase.getInstance();
+            return mFirebaseDatabase;
+        }
+    }
+
+    protected DeviceService createDeviceService() {
+        return new GBDeviceService(this);
+    }
+
+    @Override
+    public void onCreate() {
+        app = this;
+        super.onCreate();
+
+        String token = FirebaseInstanceId.getInstance().getToken();
+        FirebaseDatabase.getInstance().setPersistenceEnabled(true);
+
+        if (lockHandler != null) {
+            // guard against multiple invocations (robolectric)
+            return;
+        }
+
+        sharedPrefs = PreferenceManager.getDefaultSharedPreferences(context);
+        prefs = new Prefs(sharedPrefs);
+        gbPrefs = new GBPrefs(prefs);
+
+        if (!GBEnvironment.isEnvironmentSetup()) {
+            GBEnvironment.setupEnvironment(GBEnvironment.createDeviceEnvironment());
+            // setup db after the environment is set up, but don't do it in test mode
+            // in test mode, it's done individually, see TestBase
+            setupDatabase();
+        }
+
+        // don't do anything here before we set up logging, otherwise
+        // slf4j may be implicitly initialized before we properly configured it.
+        setupLogging(isFileLoggingEnabled());
+
+        if (getPrefsFileVersion() != CURRENT_PREFS_VERSION) {
+            migratePrefs(getPrefsFileVersion());
+        }
+
+        setupExceptionHandler();
+
+        deviceManager = new DeviceManager(this);
+        String language = prefs.getString("language", "default");
+        setLanguage(language);
+
+        deviceService = createDeviceService();
+        loadAppsNotifBlackList();
+        loadAppsPebbleBlackList();
+        loadCalendarsBlackList();
+
+        if (isRunningMarshmallowOrLater()) {
+            notificationManager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
+            //the following will ensure the notification manager is kept alive
+            if (isRunningOreoOrLater()) {
+                NotificationChannel channel = notificationManager.getNotificationChannel(NOTIFICATION_CHANNEL_ID);
+                if (channel == null) {
+                    channel = new NotificationChannel(NOTIFICATION_CHANNEL_ID,
+                            getString(R.string.notification_channel_name),
+                            NotificationManager.IMPORTANCE_LOW);
+                    notificationManager.createNotificationChannel(channel);
+                }
+
+                bluetoothStateChangeReceiver = new BluetoothStateChangeReceiver();
+                registerReceiver(bluetoothStateChangeReceiver, new IntentFilter(BluetoothAdapter.ACTION_STATE_CHANGED));
+            }
+            startService(new Intent(this, NotificationCollectorMonitorService.class));
+        }
+
+        if (prefs.getBoolean("auto_fetch_enabled", false)) {
+            registerReceiver(new GBAutoFetchReceiver(), new IntentFilter("android.intent.action.USER_PRESENT"));
+        }
+    }
+
+    @Override
+    public void onTrimMemory(int level) {
+        super.onTrimMemory(level);
+        if (level >= TRIM_MEMORY_BACKGROUND) {
+            if (!hasBusyDevice()) {
+                DBHelper.clearSession();
+            }
+        }
+    }
+
+    /**
+     * Returns true if at least a single device is busy, e.g synchronizing activity data
+     * or something similar.
+     * Note: busy is not the same as connected or initialized!
+     */
+    private boolean hasBusyDevice() {
+        List<GBDevice> devices = getDeviceManager().getDevices();
+        for (GBDevice device : devices) {
+            if (device.isBusy()) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    private void setupExceptionHandler() {
+        LoggingExceptionHandler handler = new LoggingExceptionHandler(Thread.getDefaultUncaughtExceptionHandler());
+        Thread.setDefaultUncaughtExceptionHandler(handler);
+    }
+
+    public void setupDatabase() {
+        DaoMaster.OpenHelper helper;
+        GBEnvironment env = GBEnvironment.env();
+        if (env.isTest()) {
+            helper = new DaoMaster.DevOpenHelper(this, null, null);
+        } else {
+            helper = new DBOpenHelper(this, DATABASE_NAME, null);
+        }
+        SQLiteDatabase db = helper.getWritableDatabase();
+        DaoMaster daoMaster = new DaoMaster(db);
+        if (lockHandler == null) {
+            lockHandler = new LockHandler();
+        }
+        lockHandler.init(daoMaster, helper);
+    }
+
     private int getPrefsFileVersion() {
         try {
             return Integer.parseInt(sharedPrefs.getString(PREFS_VERSION, "0")); //0 is legacy
@@ -623,69 +698,14 @@ public static String packageNameToPebbleMsgSender(String packageName) {
         editor.apply();
     }
 
-    public static void setLanguage(String lang) {
-        if (lang.equals("default")) {
-            language = Resources.getSystem().getConfiguration().locale;
-        } else {
-            language = new Locale(lang);
-        }
-        updateLanguage(language);
-    }
-
-    public static void updateLanguage(Locale locale) {
-        AndroidUtils.setLanguage(context, locale);
-
-        Intent intent = new Intent();
-        intent.setAction(ACTION_LANGUAGE_CHANGE);
-        LocalBroadcastManager.getInstance(context).sendBroadcast(intent);
-    }
-
-    public static LimitedQueue getIDSenderLookup() {
-        return mIDSenderLookup;
-    }
-
-    public static boolean isDarkThemeEnabled() {
-        return prefs.getString("pref_key_theme", context.getString(R.string.pref_theme_value_light)).equals(context.getString(R.string.pref_theme_value_dark));
-    }
-
-    public static int getTextColor(Context context) {
-        TypedValue typedValue = new TypedValue();
-        Resources.Theme theme = context.getTheme();
-        theme.resolveAttribute(R.attr.textColorPrimary, typedValue, true);
-        return typedValue.data;
-    }
-
     @Override
     public void onConfigurationChanged(Configuration newConfig) {
         super.onConfigurationChanged(newConfig);
         updateLanguage(getLanguage());
     }
 
-    public static int getBackgroundColor(Context context) {
-        TypedValue typedValue = new TypedValue();
-        Resources.Theme theme = context.getTheme();
-        theme.resolveAttribute(android.R.attr.background, typedValue, true);
-        return typedValue.data;
-    }
-
-    public static Prefs getPrefs() {
-        return prefs;
-    }
-
-    public static GBPrefs getGBPrefs() {
-        return gbPrefs;
-    }
-
     public DeviceManager getDeviceManager() {
         return deviceManager;
-    }
-
-    public static GBApplication app() {
-        return app;
-    }
-
-    public static Locale getLanguage() {
-        return language;
     }
 
     public String getVersion() {

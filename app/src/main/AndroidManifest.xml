@@ -46,15 +46,19 @@
         android:label="@string/app_name"
         android:theme="@style/GadgetbridgeTheme">
         <activity
-            android:name=".activities.ControlCenterv2"
+            android:name=".com.sjain.LandingActivity"
             android:label="@string/title_activity_controlcenter"
             android:theme="@style/GadgetbridgeTheme.NoActionBar">
             <intent-filter>
-                <category android:name="android.intent.category.DEFAULT" />
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <activity
+            android:name=".activities.ControlCenterv2"
+            android:screenOrientation="portrait" />
 
         <!---COM.SJAIN.PULSE FILES-->
         <activity
@@ -485,6 +489,31 @@
                 <data android:scheme="gadgetbridge" />
             </intent-filter>
         </activity>
+
+        <activity
+            android:name=".com.sjain.MyAcclerationSpeed.DailogMessageActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".com.sjain.MyAcclerationSpeed.MainActivity"
+            android:label="BlackSpot"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".com.sjain.LoginActivity"
+            android:label="ER SAFETY"
+            android:screenOrientation="portrait" />
+
+        <meta-data
+            android:name="com.google.android.gms.version"
+            android:value="@integer/google_play_services_version" />
+
+        <!-- MapsKey : AIzaSyB9YLJdRG2OTEW5UUyPfeS4viXthaXDsm8 -->
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="AIzaSyB9YLJdRG2OTEW5UUyPfeS4viXthaXDsm8" />
+
+        <service
+            android:name=".com.sjain.MyAcclerationSpeed.utilities.CallDetectService"
+            android:enabled="true" />
 
     </application>
 

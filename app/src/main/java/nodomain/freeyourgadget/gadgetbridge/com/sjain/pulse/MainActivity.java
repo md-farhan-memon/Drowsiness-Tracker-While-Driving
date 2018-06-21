@@ -72,47 +72,46 @@ import static nodomain.freeyourgadget.gadgetbridge.com.sjain.pulse.FetchAddressI
 public class MainActivity extends AppCompatActivity implements GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener, LocationListener {
 
 
+    private static final int FAILURE_RESULT = 1;
+    public static int PERMISSION_ALL = 111;
+    private static long restTimer = 30 * 1000; /*5 * 60 * 1000*/
+    private static long DriveTimer = 60 * 1000; /*2 * 60 * 60 * 1000*/
+    public LocationRequest mLocationRequest;
     double latitude;
     double longitude;
     Boolean isListeningHeartRate = false;
-
     LineChart mLineChart;
-
     BluetoothAdapter bluetoothAdapter;
     BluetoothGatt bluetoothGatt;
     BluetoothDevice bluetoothDevice;
-
     GoogleApiClient mGoogleApiClient;
-    public static int PERMISSION_ALL = 111;
-    private static final int FAILURE_RESULT = 1;
     AddressResultReceiver mResultReceiver;
     Status status;
     Double speed = 0.0;
     Double MIN_SPEED = 25.0;
     int MINHEARTRATE = 60;
     CountDownTimer mTimerDrive, mTimerRest;
-
-
+    AlertDialog alert, alert1, alertDrowzy;
+    ArrayList<Entry> heartRate;
+    TextView tvHeartRate, tvSpeed;
+    Boolean isConnected = false;
+    Integer drowzyCount = 0;
     private Location mPreviousLoc = null;
-    public LocationRequest mLocationRequest;
     private PendingResult<LocationSettingsResult> pendingResult;
-
-    private static long restTimer = 30 * 1000; /*5 * 60 * 1000*/
-    private static long DriveTimer = 60 * 1000; /*2 * 60 * 60 * 1000*/
-
     private boolean drivetimerRunning = false;
     private boolean resttimerRunning = false;
-    AlertDialog alert, alert1, alertDrowzy;
-
-
-    ArrayList<Entry> heartRate;
-
-    TextView tvHeartRate, tvSpeed;
-
-    Boolean isConnected = false;
-
-    Integer drowzyCount = 0;
 //    int dummyValue = 60;
+
+    public static boolean hasPermissions(Context context, String... permissions) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M && context != null && permissions != null) {
+            for (String permission : permissions) {
+                if (ActivityCompat.checkSelfPermission(context, permission) != PackageManager.PERMISSION_GRANTED) {
+                    return false;
+                }
+            }
+        }
+        return true;
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -153,7 +152,6 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.C
     void initializeObjects() {
         bluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
     }
-
 
     @Override
     protected void onNewIntent(Intent intent) {
@@ -244,7 +242,6 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.C
         mResultReceiver = new AddressResultReceiver(new Handler());
     }
 
-
     private void stopLocationUpdates() {
         LocationServices.FusedLocationApi.removeLocationUpdates(mGoogleApiClient, this);
     }
@@ -258,17 +255,6 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.C
             initializeObjects();
             getBoundedDevice();
         }
-    }
-
-    public static boolean hasPermissions(Context context, String... permissions) {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M && context != null && permissions != null) {
-            for (String permission : permissions) {
-                if (ActivityCompat.checkSelfPermission(context, permission) != PackageManager.PERMISSION_GRANTED) {
-                    return false;
-                }
-            }
-        }
-        return true;
     }
 
     @Override
@@ -333,28 +319,6 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.C
 
 
     }
-
-    class AddressResultReceiver extends ResultReceiver {
-
-        AddressResultReceiver(Handler handler) {
-            super(handler);
-        }
-
-        /**
-         * Receives data sent from FetchAddressIntentService and updates the UI.
-         */
-        @Override
-        protected void onReceiveResult(int resultCode, Bundle resultData) {
-            if (resultCode == FAILURE_RESULT) {
-            }
-            Address address = resultData.getParcelable(RESULT_DATA_KEY);
-            if (address != null) {
-                latitude = address.getLatitude();
-                longitude = address.getLongitude();
-            }
-        }
-    }
-
 
     public void timerDrive() {
         mTimerDrive = new CountDownTimer(DriveTimer, 1000) {
@@ -428,10 +392,6 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.C
         }.start();
 
     }
-
-
-    //Bluetooth To measure heart rate methods
-
 
     void getBoundedDevice() {
         Set<BluetoothDevice> boundedDevice = bluetoothAdapter.getBondedDevices();
@@ -526,6 +486,9 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.C
             }
         }
     }
+
+
+    //Bluetooth To measure heart rate methods
 
     private void updateIsDrowzy(Integer currenthRate) {
         if (currenthRate < MINHEARTRATE) {
@@ -653,12 +616,9 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.C
         updateTextViewValues("DisConnected");*/
     }
 
-
     void startScanHeartRate() {
         if (bluetoothGatt != null) {
-            Log.e("HEllo", "SOLVED");
-            BluetoothGattCharacteristic bchar = bluetoothGatt.getService(CustomBluetoothProfile.HeartRate.service)
-                    .getCharacteristic(CustomBluetoothProfile.HeartRate.controlCharacteristic);
+            BluetoothGattCharacteristic bchar = bluetoothGatt.getService(CustomBluetoothProfile.HeartRate.service).getCharacteristic(CustomBluetoothProfile.HeartRate.controlCharacteristic);
             if (bchar != null) {
                 bchar.setValue(new byte[]{21, 2, 1});
                 bluetoothGatt.writeCharacteristic(bchar);
@@ -667,7 +627,6 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.C
             Log.e("HEllo", "PROBLEM");
         }
     }
-
 
     void listenHeartRate() {
         BluetoothGattCharacteristic bchar = bluetoothGatt.getService(CustomBluetoothProfile.HeartRate.service)
@@ -726,6 +685,27 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.C
             }
         });
 
+    }
+
+    class AddressResultReceiver extends ResultReceiver {
+
+        AddressResultReceiver(Handler handler) {
+            super(handler);
+        }
+
+        /**
+         * Receives data sent from FetchAddressIntentService and updates the UI.
+         */
+        @Override
+        protected void onReceiveResult(int resultCode, Bundle resultData) {
+            if (resultCode == FAILURE_RESULT) {
+            }
+            Address address = resultData.getParcelable(RESULT_DATA_KEY);
+            if (address != null) {
+                latitude = address.getLatitude();
+                longitude = address.getLongitude();
+            }
+        }
     }
 
 

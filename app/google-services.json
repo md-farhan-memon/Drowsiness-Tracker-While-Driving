@@ -1,0 +1,46 @@
+{
+  "project_info": {
+    "project_number": "213872632243",
+    "firebase_url": "https://ersafety-app.firebaseio.com",
+    "project_id": "ersafety-app",
+    "storage_bucket": "ersafety-app.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:213872632243:android:7845ecb707322d9a",
+        "android_client_info": {
+          "package_name": "nodomain.freeyourgadget.gadgetbridge"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "213872632243-fhuf8uh14ruvnhp2kln8jvut22blkq6p.apps.googleusercontent.com",
+          "client_type": 3
+        },
+        {
+          "client_id": "213872632243-fhuf8uh14ruvnhp2kln8jvut22blkq6p.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB0GNxye6EfzdYIIfyiMzq_dP8S05OeF3Y"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

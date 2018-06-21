@@ -152,6 +152,8 @@ public class Prefs {
         }
     }
 
+
+
     private void logReadError(String key, Exception ex) {
         Log.e(TAG, "Error reading preference value: " + key + "; returning default value", ex); // log the first exception
     }

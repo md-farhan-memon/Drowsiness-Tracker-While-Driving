@@ -15,11 +15,11 @@
             android:icon="@drawable/ic_database_management" />
         <item android:id="@+id/action_blacklist"
             android:title="@string/title_activity_appblacklist"
-            android:icon="@drawable/ic_block_black" />
+            android:icon="@drawable/ic_block_black" />-->
 
         <item android:id="@+id/action_quit"
             android:title="@string/action_quit"
-            android:icon="@drawable/ic_quit" />-->
+            android:icon="@drawable/ic_quit" />
     </group>
 
     <!--<group
